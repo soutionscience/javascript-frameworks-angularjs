@@ -1,8 +1,8 @@
-exports class Dish {
-	name: string;
-	image: string;
-	category: string;
-	lable: string;
-	price: string;
-	description: string;
+export class Dish {
+    name: string;
+    image: string;
+    category: string;
+    label: string;
+    price: string;
+    description: string;
 }
