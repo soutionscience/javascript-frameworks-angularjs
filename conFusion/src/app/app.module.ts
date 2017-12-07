@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '@angular/material';
 import{ FlexLayoutModule} from '@angular/flex-layout'
 import 'hammerjs'
-import { FormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -48,7 +48,8 @@ import { LoginComponent } from './login/login.component'
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents:[
   LoginComponent
