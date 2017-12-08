@@ -24,4 +24,5 @@ export class PromotionService {
   	return Observable.of(PROMOTIONS.filter((promotion)=>(promotion.featured))[0]).delay(2000);
   }
 
+
 }
