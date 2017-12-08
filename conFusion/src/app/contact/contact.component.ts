@@ -21,20 +21,28 @@ this.createForm();
   createForm(){
 
   	this.feedbackForm = this.fb.group({
-  		firstname: '',
-  		lastname: '',
-  		telnum: 0,
-  		email:'',
+  		firstname: ['', Validators.minLength(3)],
+  		lastname: ['', Validators.required],
+  		telnum: ['', Validators.required],
+  		email:['', Validators.email],
   		agree: false,
   		contacttype: 'None',
-  		message: ''
+  		message: '',
   	})
 
   }
   onSubmit(){
   	this.feedback = this.feedbackForm.value;
   	console.log(this.feedback);
-  	this.feedbackForm.reset();
+  	this.feedbackForm.reset({
+  		firstname: '',
+  		lastname: '',
+  		telnum:'',
+  		email:'',
+  		agree: false,
+  		contacttype:'None',
+  		message:''
+  	});
 
   }
 
