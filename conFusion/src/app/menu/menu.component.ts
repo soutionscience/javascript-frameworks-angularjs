@@ -19,8 +19,8 @@ tester : string;
     this.tester = "23";
     console.log(this.tester)
     console.log("calling on init")
-     this.dishes = this.dishService.getDishes();    
-
+   this.dishService.getDishes()
+      .then(dishes => this.dishes = dishes);
   }
 
     onSelect(dish: Dish){
