@@ -8,6 +8,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '@angular/material';
 import{ FlexLayoutModule} from '@angular/flex-layout';
 
+import {HttpModule} from '@angular/http'
+import {ProcessHttpmsgService} from './services/process-httpmsg.service'
+
 
 import 'hammerjs'
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
@@ -32,6 +35,8 @@ import { LeadershipService} from './services/leadership.service'
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component'
 
+import { baseURL} from './shared/baseUrl'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,12 +56,15 @@ import { LoginComponent } from './login/login.component'
     FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    
+    HttpModule
+    
   ],
   entryComponents:[
   LoginComponent
   ],
-  providers: [ DishService, PromotionService, LeadershipService ],
+  providers: [ DishService, ProcessHttpmsgService,PromotionService, LeadershipService , {provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

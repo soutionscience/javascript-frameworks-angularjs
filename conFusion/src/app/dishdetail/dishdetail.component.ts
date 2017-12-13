@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { Dish } from '../shared/dish'
 
 import {Params, ActivatedRoute} from '@angular/router';
@@ -50,14 +50,15 @@ export class DishdetailComponent implements OnInit {
   constructor( private dishService: DishService,
   	          private route: ActivatedRoute,
   	          private location: Location,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+               @Inject('BaseURL') private BaseUrl)
+               {
 
-              this.createForm()
                }
 
 
                createForm(){
-                 // var date = Date.now();
+                 this.createForm()
                   console.log(this.date)
 
                  this.commentForm = this.fb.group({
