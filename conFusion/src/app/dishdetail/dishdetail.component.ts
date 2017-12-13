@@ -7,6 +7,9 @@ import {Location} from '@angular/common'
 import {DishService} from '../services/dish.service'
 import 'rxjs/add/operator/switchMap';
 
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+
 
 
 @Component({
@@ -16,15 +19,78 @@ import 'rxjs/add/operator/switchMap';
 })
 export class DishdetailComponent implements OnInit {
 
-	// @Input()
+	commentForm: FormGroup;
 	dish: Dish;
   dishIds: number[];
   prev: number;
   next: number;
+  //date: Date;
+  date = Date.now()
+
+  formErrors ={
+   'author': '',
+   'rating': '',
+   'comment': '',
+   'date':''
+
+  }
+
+  validationMessages ={
+    'author':{
+       'required':      'First Name is required.',
+      'minlength':     'First Name must be at least 2 characters long.',
+      'maxlength':     'FirstName cannot be more than 25 characters long.'
+    },
+    'comment':{
+       'required':      'comment is required.',
+      'minlength':     'comment must be at least 2 characters long.'
+    }
+  }
 
   constructor( private dishService: DishService,
   	          private route: ActivatedRoute,
-  	          private location: Location) { }
+  	          private location: Location,
+              private fb: FormBuilder) {
+
+              this.createForm()
+               }
+
+
+               createForm(){
+                 // var date = Date.now();
+                  console.log(this.date)
+
+                 this.commentForm = this.fb.group({
+                   author: ['', [Validators.required, Validators.maxLength(2), Validators.maxLength(25)]],
+                   rating: ['5'],
+                   comment:['', [Validators.required, Validators.minLength(2)]],
+                   date: ['']
+
+                 })
+
+
+                  this.commentForm.valueChanges
+            .subscribe(data => this.onValueChange(data))
+
+
+
+               }
+
+               onValueChange(data?: any) { 
+                 if (!this.commentForm) { return; }
+    const form = this.commentForm;
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
 
   ngOnInit() {
 
@@ -43,6 +109,18 @@ export class DishdetailComponent implements OnInit {
 
   goBack(): void{
   	this.location.back();
+  }
+  onSubmit(){
+    console.log(this.commentForm.value);
+    this.commentForm.value.date = this.date;
+    this.dish.comments.push(this.commentForm.value)
+    this.commentForm.reset({
+      author:'',
+      rating:'',
+      comment:'',
+      date: ''
+
+    })
   }
 
 }

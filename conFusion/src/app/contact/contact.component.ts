@@ -48,24 +48,38 @@ this.createForm();
   createForm(){
 
   	this.feedbackForm = this.fb.group({
-  		firstname: ['', [Validators.minLength(3), Validators.required, Validators.maxLength(25)]],
-  		lastname: ['', [Validators.minLength(3), Validators.required, Validators.maxLength(25)]],
-  		telnum: ['', [Validators.required, Validators.pattern]],
-  		email:['', [Validators.email, Validators.required, ]],
-  		agree: false,
-  		contacttype: 'None',
-  		message: '',
+      firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+      lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+      telnum: ['', [Validators.required, Validators.pattern] ],
+      email: ['', [Validators.required, Validators.email] ],
+      agree: false,
+      contacttype: 'None',
+      message: ''
   	})
 
 
     this.feedbackForm.valueChanges
     .subscribe(data => this.onValueChange(data));
-    //this.onValueChange();
+    this.onValueChange();
 
   }
   onValueChange(data?: any){
+    if (!this.feedbackForm) { return; }
+    const form = this.feedbackForm;
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
 
-  }
+    }
+    
   onSubmit(){
   	this.feedback = this.feedbackForm.value;
   	console.log(this.feedback);

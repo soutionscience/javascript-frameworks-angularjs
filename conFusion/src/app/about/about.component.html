@@ -1,14 +1,64 @@
-<div class="container">
-	<h1>About us</h1>
-	<hr>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc</p>
-</div>
-
-<div class="container">
-	<h1>Corporate Leadership</h1>
-	<div class="leaders" *ngFor ="let lead of leader">
-		<p>name: {{lead.name}}</p>
-		<p>{{lead.description}}</p>
-	</div>
-	
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+  <div fxFlex>
+    <div>
+      <h3>About Us</h3>
+      <hr>
+    </div>
+  </div>
+  <div fxFlex>
+    <div fxLayout="column" fxLayout.gt-sm="row">
+      <div fxFlex="70">
+        <h2>Our History</h2>
+        <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong. Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
+        <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
+      </div>
+      <div fxFlex="30">
+        <md-card>
+          <md-card-header>
+            <md-card-title>
+              <h2>Facts At a Glance</h2>
+            </md-card-title>
+          </md-card-header>
+          <md-card-content>
+            <dl>
+              <dt>Started</dt>
+              <dd>3 Feb. 2013</dd>
+              <dt>Major Stake Holder</dt>
+              <dd>HK Fine Foods Inc.</dd>
+              <dt>Last Year's Turnover</dt>
+              <dd>$1,250,375</dd>
+              <dt>Employees</dt>
+              <dd>40</dd>
+            </dl>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+  </div>
+  <div fxFlex>
+    <md-card>
+      <blockquote>
+        <h3>You better cut the pizza in four pieces because
+                            I'm not hungry enough to eat six.</h3>
+        <footer>-- Yogi Berra,
+          <cite>The Wit and Wisdom of Yogi Berra, P. Pepe, Diversion Books, 2014</cite>
+        </footer>
+      </blockquote>
+    </md-card>
+  </div>
+  <div fxFlex>
+    <h2>Corporate Leadership</h2>
+    <md-card *ngFor="let lead of leader">
+      <md-card-content>
+        <div class="picture">
+          <img md-card-avatar src="{{lead.image}}">
+        </div>
+        <div class="content">
+          <p>{{lead.name}}</p>
+          <p>{{lead.designation}}</p>
+          <p>{{lead.description}}</p>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
 </div>
