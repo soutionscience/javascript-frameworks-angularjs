@@ -11,7 +11,7 @@ import{ DishService} from '../services/dish.service'
 export class MenuComponent implements OnInit {
  dishes: Dish[]
 tester : string;
-  selectedDish: Dish;
+errorMess: string;
 
   constructor (private dishService : DishService,
     @Inject('BaseURL') private BaseUrl) { }
@@ -21,7 +21,7 @@ tester : string;
     console.log(this.tester)
     console.log("calling on init")
    this.dishService.getDishes()
-      .subscribe(dishes => this.dishes = dishes);
+      .subscribe(dishes => this.dishes = dishes, errmess => this.errorMess = <any> errmess);
   }
 
 

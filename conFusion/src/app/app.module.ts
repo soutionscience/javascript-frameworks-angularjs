@@ -35,7 +35,9 @@ import { LeadershipService} from './services/leadership.service'
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component'
 
-import { baseURL} from './shared/baseUrl'
+import { baseURL} from './shared/baseUrl';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/rest-config'
 
 @NgModule({
   declarations: [
@@ -57,8 +59,8 @@ import { baseURL} from './shared/baseUrl'
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule, 
-    
-    HttpModule
+    HttpModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
     
   ],
   entryComponents:[

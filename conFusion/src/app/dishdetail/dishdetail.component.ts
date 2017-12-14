@@ -53,12 +53,12 @@ export class DishdetailComponent implements OnInit {
               private fb: FormBuilder,
                @Inject('BaseURL') private BaseUrl)
                {
-
+               this.createForm()
                }
 
 
                createForm(){
-                 this.createForm()
+                 
                   console.log(this.date)
 
                  this.commentForm = this.fb.group({

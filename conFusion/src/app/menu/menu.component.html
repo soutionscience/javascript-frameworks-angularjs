@@ -9,7 +9,7 @@
 	</div>
 	<div fxFlex *ngIf="dishes">
   <md-grid-list cols="2" rowHeight="200px">
-  	<md-grid-tile *ngFor ="let dish of dishes" [routerLink] = "['/dishdetail', dish.id]">
+  	<md-grid-tile *ngFor ="let dish of dishes" [routerLink] = "['/dishdetail/', dish.id]">
   		<img height="200px" src="{{BaseUrl + dish.image}}" alt={{dish.name}}>
   		<md-grid-tile-footer>
   		<h1 md-line>{{dish.name | uppercase}}</h1>
@@ -18,7 +18,11 @@
 
   </md-grid-list>
 </div>
-<div [hidden]="dishes"><md-spinner></md-spinner> Loading please wait</div>
+<div [hidden]="dishes || errMess"><md-spinner></md-spinner> Loading please wait</div>
+<div *ngIf= "errMess">
+	<h1>Error</h1>
+	<h2>{{errMess}}</h2>
+</div>
 
 
 
