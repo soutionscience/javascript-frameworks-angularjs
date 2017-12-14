@@ -37,7 +37,8 @@ import { LoginComponent } from './login/login.component'
 
 import { baseURL} from './shared/baseUrl';
 import { RestangularModule, Restangular } from 'ngx-restangular';
-import { RestangularConfigFactory } from './shared/rest-config'
+import { RestangularConfigFactory } from './shared/rest-config';
+import { HighlightDirective } from './directives/highlight.directive'
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { RestangularConfigFactory } from './shared/rest-config'
     HomeComponent,
     ContactComponent,
     AboutComponent ,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
