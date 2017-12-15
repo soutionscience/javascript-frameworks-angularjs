@@ -48,7 +48,7 @@
   </div>
   <div fxFlex>
     <h2>Corporate Leadership</h2>
-    <md-card *ngFor="let lead of leader">
+    <md-card *ngFor="let lead of leader"  [@expand]>
       <md-card-content>
         <div class="picture">
           <img md-card-avatar src="{{lead.image}}">
