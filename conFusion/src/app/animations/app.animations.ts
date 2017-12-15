@@ -25,4 +25,4 @@ export function expand() {
 				animate('0.2s ease-in',
 					style({opacity: 1, transform: 'translateX(0)'}))])
 			])
-},
+}
