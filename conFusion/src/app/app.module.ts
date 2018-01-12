@@ -29,6 +29,8 @@ import { AboutComponent } from './about/about.component'
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeadershipService} from './services/leadership.service'
+import {FeedbackService } from './services/feedback.service';
+
 
 
 
@@ -68,7 +70,7 @@ import { HighlightDirective } from './directives/highlight.directive'
   entryComponents:[
   LoginComponent
   ],
-  providers: [ DishService, ProcessHttpmsgService,PromotionService, LeadershipService , {provide: 'BaseURL', useValue: baseURL}],
+  providers: [ DishService, ProcessHttpmsgService,PromotionService, LeadershipService , FeedbackService, {provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

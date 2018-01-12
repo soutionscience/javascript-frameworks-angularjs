@@ -36,4 +36,7 @@ export class DishService {
  })
 
   }
+  postDishes(dish){
+    this.restangular.all('dishes').post(dish)
+  }
 }

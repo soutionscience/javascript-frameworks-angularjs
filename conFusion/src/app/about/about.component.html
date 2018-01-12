@@ -51,7 +51,7 @@
     <md-card *ngFor="let lead of leader"  [@expand]>
       <md-card-content>
         <div class="picture">
-          <img md-card-avatar src="{{lead.image}}">
+          <img md-card-avatar src="{{BaseUrl + lead.image}}">
         </div>
         <div class="content">
           <p>{{lead.name}}</p>

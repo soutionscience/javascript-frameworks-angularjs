@@ -112,7 +112,8 @@ export class DishdetailComponent implements OnInit {
 
   	this.route.params
     .switchMap((params: Params) => { this.visibility = 'hidden'; return this.dishService.getDish(+params['id'])})
-    .subscribe(dish => {this.dish = dish; this.dishcopy=dish; this.setPrevNext(dish.id); this.visibility = 'shown'; });
+    .subscribe(dish => {this.dish = dish; this.dishcopy=dish;this.setPrevNext(dish.id); this.visibility = 'shown'; });
+    
   }
 
   setPrevNext(dishId: number) {
@@ -127,7 +128,8 @@ export class DishdetailComponent implements OnInit {
   onSubmit(){
     console.log(this.commentForm.value);
     this.commentForm.value.date = this.date;
-    this.dishcopy.comments.push(this.commentForm.value)
+    this.dishcopy.comments.push(this.commentForm.value);
+    console.log("we are here ",  this.dishcopy)
     this.dishcopy.save()
      .subscribe(dish => { this.dish = dish; console.log(this.dish); });
     this.commentForm.reset({

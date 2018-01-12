@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import{ Feedback , ContactType} from '../shared/feedback';
 import {flyInOut} from '../animations/app.animations'
+import {FeedbackService } from '../services/feedback.service';
+import { Observable } from 'rxjs/Observable';
+
+
 
 
 @Component({
@@ -20,7 +24,13 @@ import {flyInOut} from '../animations/app.animations'
 export class ContactComponent implements OnInit {
 	feedbackForm: FormGroup;
 	 feedback: Feedback;
+   feedbackCopy  = null;
+   serverFeedback: Feedback[];
 	 contactType = ContactType;
+   submited = false;
+   spinner = true;
+   displayContent = true;
+   timer: Observable<any>;
    formErrors = {
     'firstname': '',
     'lastname': '',
@@ -49,11 +59,17 @@ export class ContactComponent implements OnInit {
   };
 
 
-  constructor( private fb: FormBuilder) { 
+  constructor( private fb: FormBuilder, 
+    private feedbackService: FeedbackService, 
+     @Inject('BaseURL') private BaseUrl) { 
 this.createForm();
   }
 
   ngOnInit() {
+
+    // this.feedbackService.getFeedback()
+    // .subscribe(feedback=> {this.feedbackCopy=feedback;})
+
   }
   createForm(){
 
@@ -89,19 +105,39 @@ this.createForm();
     }
 
     }
+
+    myTimeOut(){
+     return setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.serverFeedback = null;
+        this.resetFeedbackForm();
+        this.submited = false;
+   },5000);
+         
+    }
+    resetFeedbackForm(){
+      return  	this.feedbackForm.reset({
+        firstname: '',
+        lastname: '',
+        telnum:'',
+        email:'',
+        agree: false,
+        contacttype:'None',
+        message:''
+      });
+    }
     
   onSubmit(){
   	this.feedback = this.feedbackForm.value;
-  	console.log(this.feedback);
-  	this.feedbackForm.reset({
-  		firstname: '',
-  		lastname: '',
-  		telnum:'',
-  		email:'',
-  		agree: false,
-  		contacttype:'None',
-  		message:''
-  	});
+    this.submited = true;
+    this.spinner = false;
+    
+    this.feedbackService.postFeedback(this.feedback).subscribe(mydata=> {
+      this.serverFeedback = mydata; this.spinner = true; this.myTimeOut()
+});
+
+
+    
+ 
 
   }
 

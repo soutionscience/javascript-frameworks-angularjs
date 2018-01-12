@@ -34,13 +34,11 @@
       </div>
     </div>
   </div>
-  <h4>{{feedbackForm.value.firstname}}</h4>
   <div fxFlex fxFlexOffser="20px" class="form-size">
     <h3>Send your feedback</h3>
-    <p>{{feedbackForm.value |json }}</p>
-    <p>{{feedbackForm.status | json}}</p>
+  
 
-          <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+          <form [@flyInOut] novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [hidden]="submited">
           <p>
             <md-input-container class="half-width"
              dividerColor="{{(feedbackForm.get('firstname').hasError('required') && feedbackForm.get('firstname').touched) ? 'warn' : 'primary'}}">
@@ -95,4 +93,20 @@
             </md-input-container>
           </p>
           <button type="submit" md-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
+
+            
+          
         </form>
+
+
+           <div [hidden]="spinner"><md-spinner></md-spinner> sending ...</div>
+
+          <div [@flyInOut] *ngIf="serverFeedback">
+            <h1>Your FeedBack</h1>
+            <h2>{{serverFeedback.firstname}}</h2>
+            <h2>{{serverFeedback.lastname}}</h2>
+            <p>{{serverFeedback.telnum}}</p>
+            <p>{{serverFeedback.email}}</p>
+            <p>{{serverFeedback.contacttype}}</p>
+            <p>{{serverFeedback.message}}</p>
+          </div>

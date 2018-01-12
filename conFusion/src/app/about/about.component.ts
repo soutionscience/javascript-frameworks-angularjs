@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 
 import {Leader} from '../shared/leader'
 import {LeadershipService} from '../services/leadership.service';
-import {flyInOut} from '../animations/app.animations'
+import {flyInOut, expand} from '../animations/app.animations';
+import {Restangular, RestangularModule} from 'ngx-restangular';
+
 
 
 @Component({
@@ -15,14 +17,16 @@ import {flyInOut} from '../animations/app.animations'
 
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class AboutComponent implements OnInit {
 
 	leader: Leader[]
 
-  constructor( private leadershipService: LeadershipService) { }
+  constructor( private leadershipService: LeadershipService, 
+    @Inject('BaseURL') private BaseUrl) { }
 
   ngOnInit() {
    this.leadershipService.getLeaders().subscribe(leader => this.leader = leader)
